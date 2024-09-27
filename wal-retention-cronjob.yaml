@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: wal-retention-cronjob
+spec:
+  schedule: "0 3 * * *"  # Schedule to run at 3 AM daily
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: cluster-gw  # Use the cluster-gw service account
+          containers:
+          - name: backup-script-modifier
+            image: dockersanjeev/backup-script-modifier:latest
+            imagePullPolicy: Always
+            # Add any necessary environment variables or volume mounts here
+          restartPolicy: OnFailure
