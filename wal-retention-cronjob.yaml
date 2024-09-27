@@ -11,7 +11,7 @@ spec:
           serviceAccountName: cluster-gw  # Use the cluster-gw service account
           containers:
           - name: backup-script-modifier
-            image: dockersanjeev/backup-script-modifier:latest
+            image: cybertecpostgresql/backup-script-modifier:latest
             imagePullPolicy: Always
             # Add any necessary environment variables or volume mounts here
           restartPolicy: OnFailure
