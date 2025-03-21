@@ -26,8 +26,8 @@ echo "$pod_list" | while read -r pod_name namespace; do
     #if [ "$namespace" != "scalefield-23-125" ]; then
     #    echo " skip."
     #    continue  # Skip to the next iteration if namespace is not "test"
-    #fi    
-    
+    #fi
+
     kubectl cp postgres_backup.sh \
       "$pod_name:/scripts/postgres_backup.sh" \
       -c postgres --no-preserve \
@@ -37,6 +37,6 @@ echo "$pod_list" | while read -r pod_name namespace; do
         echo " done"
     else
         echo " error"
-    fi      
+    fi
 
 done
