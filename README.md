@@ -1,5 +1,10 @@
 # walg-retention-scripts
 Fix for walg retention issue
 
-Create image from dockerfile and push it.
-Then run cron job 
+Reference bug: https://github.com/zalando/spilo/issues/1015
+
+
+deploy cronjob using kubectl
+```
+kubectl apply -f pg_backp_retention_fix.yaml
+```
