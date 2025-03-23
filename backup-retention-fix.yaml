@@ -26,11 +26,16 @@ data:
       exit 0
     fi
 
+    # this is only required when mounting file from configmap inside the job
+    TEMP_FILE=$(mktemp)
+    cat /scripts/postgres_backup.sh > "$TEMP_FILE"
+    chmod 0755 "$TEMP_FILE"
+
     # Process each pod name and namespace pair
     echo "$pod_list" | while read -r pod_name namespace; do
       echo -n "Processing pod: $pod_name in namespace: $namespace"
 
-      kubectl cp postgres_backup.sh \
+      kubectl cp "$TEMP_FILE" \
         "$pod_name:/scripts/postgres_backup.sh" \
         -c postgres --no-preserve \
         -n "$namespace"
